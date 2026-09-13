@@ -1,7 +1,8 @@
 import OpenAI from 'openai';
 
+const apiKey = process.env.OPENAI_API_KEY || 'placeholder-key';
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey,
 });
 
 interface GenerateReplyParams {
@@ -19,7 +20,6 @@ export async function generateAIAssistantReply({
     { role: 'system', content: systemPrompt },
   ];
 
-  // Append previous conversation history for context
   for (const chat of chatHistory) {
     formattedMessages.push({
       role: chat.sender === 'ai' ? 'assistant' : 'user',
@@ -27,7 +27,6 @@ export async function generateAIAssistantReply({
     });
   }
 
-  // Append current incoming customer message
   formattedMessages.push({ role: 'user', content: incomingMessage });
 
   const response = await openai.chat.completions.create({
