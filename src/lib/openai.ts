@@ -1,6 +1,5 @@
 import OpenAI from 'openai';
-
-const apiKey = process.env.OPENAI_API_KEY || 'placeholder-key';
+import { supabaseAdmin } from '@/lib/supabase';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || 'placeholder-key-for-build',
