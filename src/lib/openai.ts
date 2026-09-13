@@ -2,8 +2,8 @@ import OpenAI from 'openai';
 
 const apiKey = process.env.OPENAI_API_KEY || 'placeholder-key';
 
-export const openai = new OpenAI({
-  apiKey,
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || 'placeholder-key-for-build',
 });
 
 interface GenerateReplyParams {
